@@ -123,4 +123,4 @@ export default async function ProductShowcase({ params }: Props) {
       </div>
     </div>
   );
-}
+} 

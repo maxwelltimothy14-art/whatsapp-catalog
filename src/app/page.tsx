@@ -148,12 +148,14 @@ export default function Home() {
 const sendWhatsAppOrder = (product: Product) => {
     const cleanNumber = product.whatsapp_number.replace('+', '');
     
-    // Switch target link from raw asset path to your dynamic browser showcase route
-    // Note: When deployed live, localhost will switch to your true web address url string
+    // Completely emoji-free to prevent system character corruption
     const showcaseUrl = `${window.location.origin}/product/${product.id}`;
+    const imageText = product.image_url 
+      ? `\n\nLink: ${showcaseUrl}`
+      : '';
 
     const message = encodeURIComponent(
-      `Hello! I am interested in buying "${product.product_name}" from your store "${product.business_name}".\n\nPrice: ₦${product.price.toLocaleString()}\n\n👉 View Item Layout & Details: ${showcaseUrl}\n\nIs this item still available?`
+      `Hello! I am interested in buying "${product.product_name}" from your store "${product.business_name}".\n\nPrice: ₦${product.price.toLocaleString()}${imageText}\n\nIs this item still available?`
     );
     
     window.open(`https://wa.me/${cleanNumber}?text=${message}`, '_blank');

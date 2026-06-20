@@ -147,12 +147,10 @@ export default function Home() {
 
 const sendWhatsAppOrder = (product: Product) => {
     const cleanNumber = product.whatsapp_number.replace('+', '');
-    
-    // Completely emoji-free to prevent system character corruption
     const showcaseUrl = `${window.location.origin}/product/${product.id}`;
-    const imageText = product.image_url 
-      ? `\n\nLink: ${showcaseUrl}`
-      : '';
+    
+    // Clean string format with zero hidden spaces inside the newline tags
+    const imageText = product.image_url ? `\n\nLink: ${showcaseUrl}` : '';
 
     const message = encodeURIComponent(
       `Hello! I am interested in buying "${product.product_name}" from your store "${product.business_name}".\n\nPrice: ₦${product.price.toLocaleString()}${imageText}\n\nIs this item still available?`
